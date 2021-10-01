@@ -9,4 +9,65 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r library}
+library(tidyverse)
+library(haven)
+library(readxl)
+library()
+```
+## Problem 1
+### Mr.Trash_Wheel
+
+```{r Mr.Trash_Wheel}
+Mr.Trash_Wheel<-read_excel("data/Trash-Wheel-Collection-Totals-8-6-19.xlsx"
+                           ,range="A2:N408",sheet="Mr. Trash Wheel") %>% 
+  janitor::clean_names() %>% 
+  drop_na(dumpster) %>% 
+  mutate(sports_balls=round(sports_balls))
+```
+
+### precipitation data for 2018 and 2019
+```{r precipitation data for 2018 and 2019}
+precipitation_2018<-read_excel("data/Trash-Wheel-Collection-Totals-8-6-19.xlsx"
+                           ,sheet="2018 Precipitation",range="A2:B14") %>% 
+  janitor::clean_names() %>% 
+  mutate(year=2018,month=month.name)
+  
+precipitation_2019<-read_excel("data/Trash-Wheel-Collection-Totals-8-6-19.xlsx"
+                           ,sheet="2019 Precipitation",range="A2:B14") %>% 
+  janitor::clean_names() %>% 
+  mutate(year=2019,month=month.name)
+precipitation_2018_2019<-bind_rows(precipitation_2018,precipitation_2019)
+
+##precipitation_2018_2019<-bind_rows(pivot_wider(precipitation_2018,
+##                                     names_from=month,
+##                                     values_from="total"),
+##                                   pivot_wider(precipitation_2019,
+##                                     names_from=month,
+##                                     values_from="total")
+##)
+
+```
+### Report for these data
+```{r report}
+cat("the median number of sports balls in a dumpster in 2017 is ",
+    filter(Mr.Trash_Wheel,year==2017) %>% 
+      pull(sports_balls) %>% 
+      median()
+)
+cat("the total precipitation in 2018 is",
+    filter(precipitation_2018_2019,year==2018) %>% 
+      pull(total) %>% 
+      mean()
+)
+#### need other reports
+
+```
+
+## Problem 2
+###
+```{r}
+
+```
+
 
