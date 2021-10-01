@@ -1,0 +1,12 @@
+---
+title: "p8105_hw2_yk2960"
+author: "Youyuan(Keviant) Kong"
+date: "2021/10/1"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
