@@ -13,7 +13,6 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(haven)
 library(readxl)
-library(lubridate)
 library(dplyr)
 library(ggplot2)
 
@@ -27,6 +26,21 @@ Mr.Trash_Wheel<-read_excel("data/Trash-Wheel-Collection-Totals-8-6-19.xlsx"
   janitor::clean_names() %>% 
   drop_na(dumpster) %>% 
   mutate(sports_balls=round(sports_balls))
+```
+### Report for Mr.Trash_Wheel
+```{r report 1}
+cat("there are ",nrow(Mr.Trash_Wheel),"obeservations in the Mr.Trash Wheel dataset,and the main variable names are:
+",
+colnames(Mr.Trash_Wheel)
+)
+cat("the median number of sports balls in a dumpster in 2017 is ",
+    filter(Mr.Trash_Wheel,year==2017) %>% 
+      pull(sports_balls) %>% 
+      median()
+)
+
+#### need other reports
+
 ```
 
 ### precipitation data for 2018 and 2019
@@ -51,12 +65,12 @@ precipitation_2018_2019<-bind_rows(precipitation_2018,precipitation_2019)
 ##)
 
 ```
-### Report for these data
-```{r report}
-cat("the median number of sports balls in a dumpster in 2017 is ",
-    filter(Mr.Trash_Wheel,year==2017) %>% 
-      pull(sports_balls) %>% 
-      median()
+### Report for Precipitation Data for 2018 and 2019
+```{r report 2}
+cat("there are ",nrow(precipitation_2018_2019),
+"obeservations in the Mr.Trash Wheel dataset,and the main variable names are:
+",
+colnames(precipitation_2018_2019)
 )
 cat("the total precipitation in 2018 is",
     filter(precipitation_2018_2019,year==2018) %>% 
@@ -109,6 +123,48 @@ combo_df<-
 
 ##str(unemployment_df)
 ##unemployment_df$
+## need more reports
+```
+
+### Brief Report
+```{r report3}
+##report_creator <- function(x,y){
+##  x<-as.data.frame(x)
+##  cat("The dimension of ",y,"is",dim(x),".The range of years is",
+##        range(x$year),
+##      ". The main variables' names are:
+##",
+##(x)
+##)
+##}
+cat(
+"The dimension of pols month is",dim(pols_month_df),".The range of years is",
+pull(pols_month_df,year) %>% 
+range(),".
+The main variables' names are:
+",
+colnames(pols_month_df)
+)
+
+cat(
+"The dimension of snp is",dim(snp_df),".The range of years is",
+pull(snp_df,year) %>% 
+range(),".
+The main variables' names are:
+",
+colnames(snp_df)
+)
+
+cat(
+"The dimension of unemployment is",dim(unemployment_df),".The range of years is",
+pull(unemployment_df,year) %>% 
+range(),".
+The main variables' names are:
+",
+colnames(unemployment_df)
+)
+
+
 ```
 
 ## Problem 3
