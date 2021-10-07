@@ -206,7 +206,7 @@ male_nohis_2016_df<-filter(baby_names_df,
                            grepl("white non hisp",ethnicity)) %>% 
   select(rank,count)
 
-ggplot(male_nohis_2016_df, aes(x=rank, y=count))+geom_point(shape=1,color="blue") 
-
+plot<-ggplot(male_nohis_2016_df, aes(x=rank, y=count))+geom_point(shape=1,color="blue") 
+ggsave("male_nohis_2016_df.png",plot)
 
 ```
