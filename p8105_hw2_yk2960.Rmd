@@ -3,6 +3,7 @@ title: "p8105_hw2_yk2960"
 author: "Youyuan(Keviant) Kong"
 date: "2021/10/1"
 output: github_document
+##output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -21,8 +22,8 @@ library(ggplot2)
 ### Mr.Trash_Wheel
 
 ```{r Mr.Trash_Wheel}
-Mr.Trash_Wheel<-read_excel("data/Trash-Wheel-Collection-Totals-8-6-19.xlsx"
-                           ,range="A2:N408",sheet="Mr. Trash Wheel") %>% 
+Mr.Trash_Wheel<-read_excel("data/Trash-Wheel-Collection-Totals-7-2020-2.xlsx"
+                           ,range="A2:N535",sheet="Mr. Trash Wheel") %>% 
   janitor::clean_names() %>% 
   drop_na(dumpster) %>% 
   mutate(sports_balls=round(sports_balls))
@@ -210,7 +211,7 @@ male_nohis_2016_df<-filter(baby_names_df,
 
 plot<-ggplot(male_nohis_2016_df, aes(x=rank, y=count))+
   geom_point(shape=1,color="blue")
-print(plot)
+show(plot)
 ggsave("male_nohis_2016_df.png",plot)
 
 ```
